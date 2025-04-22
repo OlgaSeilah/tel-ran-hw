@@ -23,13 +23,12 @@ function luckyNumber(givenNumber) {
     let numberToString = givenNumber.toString();
     let numberLength = numberToString.length;
 
-    for (let i = 0; i < numberLength; i++) {
+    for(let i in numberLength) {
         if (i % 2 === 0) {
             digitsOnEvenInd += numberToString[i];
         } else {
             digitsOnOddInd += numberToString[i];
         }
     }
-
     return sumDigits(digitsOnEvenInd) === sumDigits(digitsOnOddInd)
 }
