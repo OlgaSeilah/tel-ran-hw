@@ -8,7 +8,7 @@ console.log(result ? 'luckyNumber' : 'unluckyNumber');
 function sumDigits(num) {
     let sum = 0;
     let numLength = num.toString().length
-    for (let i = 0; i <= numLength; i++) {
+    for (let i in numLength) {
         let lastDigit = num % 10;
         sum += lastDigit;
         num = Math.trunc(num / 10);
@@ -23,7 +23,7 @@ function luckyNumber(givenNumber) {
     let numberToString = givenNumber.toString();
     let numberLength = numberToString.length;
 
-    for(let i in numberLength) {
+    for (let i in numberLength) {
         if (i % 2 === 0) {
             digitsOnEvenInd += numberToString[i];
         } else {
