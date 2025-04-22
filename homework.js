@@ -31,9 +31,5 @@ function luckyNumber(givenNumber) {
         }
     }
 
-    if (sumDigits(digitsOnEvenInd) !== sumDigits(digitsOnOddInd)) {
-        return false;
-    } else {
-        return true;
-    }
+    return sumDigits(digitsOnEvenInd) === sumDigits(digitsOnOddInd)
 }
