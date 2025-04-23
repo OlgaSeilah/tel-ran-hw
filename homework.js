@@ -17,7 +17,8 @@ function sumDigits(num) {
     while (i < numLength) {
         let lastDigit = num % 10;
         sum += lastDigit;
-        num = Math.trunc(num / 10);
+        // num = Math.trunc(num / 10);
+        num = (num - num % 10) / 10 // way for not using Math
         numLength--;
     }
     return sum;
