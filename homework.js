@@ -1,43 +1,79 @@
-let result = sumDigits(12341);
-console.log(`sum of digits = ${result}`); // 1234 -> 10
+const array = [9, 2, 4, 1, 5, 2, 9, 1, 2, 0];
+printArray(array);
+bubbleSort(array);
+printArray(array); // -> [0, 1, 1, 2, 2, 2, 4, 5, 9, 9]
 
-
-result = luckyNumber(123871); // 123871 --> 1+3+7 === 2+8+1 (11 === 11)
-console.log(result ? 'luckyNumber' : 'UN_luckyNumber');
-
-function sumDigits(num) {
-    let sum = 0;
-    let numLength = num.toString().length;
-    for (let i = 0; i < numLength; i++) {
-        let lastDigit = num % 10;
-        sum += lastDigit;
-        num = Math.trunc(num / 10);
+function printArray(arr) {
+    console.log('----------------------');
+    for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
     }
-    let i = 0;
-    while (i < numLength) {
-        let lastDigit = num % 10;
-        sum += lastDigit;
-        // num = Math.trunc(num / 10);
-        num = (num - num % 10) / 10 // way for not using Math
-        numLength--;
-    }
-    return sum;
+    console.log('----------------------');
 }
 
-function luckyNumber(givenNumber) {
-    let digitsOnEvenInd = "";
-    let digitsOnOddInd = "";
-
-    let numberToString = givenNumber.toString();
-    const numberLength = numberToString.length;
-
-    for (let i = 0; i < numberLength; i++) {
-        if (i % 2 === 0) {
-            digitsOnEvenInd += numberToString[i];
-        } else {
-            digitsOnOddInd += numberToString[i];
+function bubbleSort(arr) {
+    let temp = 0;
+    for (let j = 0; j < arr.length; j++) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] > arr[i + 1]) {
+                temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
         }
     }
-
-    return sumDigits(digitsOnEvenInd) === sumDigits(digitsOnOddInd);
+    return arr;
 }
+
+res = luckyNumber2(123871); // 1 + 3 + 7 === 2 + 8 + 1
+console.log(res ? 'Lucky' : 'Unlucky');
+
+function luckyNumber2(number) {
+    // TODO Homework. Please explain...
+    let sum = 0;
+    while (number) {
+        sum = number % 10 - sum;
+        number = (number - number % 10) / 10;
+    }
+    return !sum;
+}
+
+/*
+* Перед началом решения я переименовала num -> number, тк две переменные с почти одинаковыми именами затрудняют чтение.
+* больше ничего не меняла.
+*
+*  В ходе всего цикла мы идем справа налево по числу.
+*
+*  т.к number - это некое число, то при переводе его в boolean получим true/false => цикл while (number) будет
+* выполняться до тех пор, пока number не станет == 0.
+* Если рассматривать 0 как boolean, то это и будет false (т.е. условие выхода из цикла)
+*
+* let sum = 0; если в терминах boolean, то это false.
+*
+* мы вычисляем значение sum, постепенно укорачивая number. В итоге number === 0, а это условие выхода из цикла.
+* возвращаем мы sum(она тут пока еще типа number), скастованную к boolean.
+* вычисление значения sum происходит при помощи чередования операций:
+*  - вычитаем цифру, присваиваем переменной значение результата
+*  - снова вычитаем цифру и нсова присваиваем переменной значение результата.
+*  - повторяем эти 2 действия до выхода из цикла.
+* Если в результате получаем 0, значит суммы чередующихся элементов равны.
+*
+*
+* внутри цикла всё время берем 1 цифру и отнимаем от нее 1 цифру. => результат может быть либо 0, либо любая другя цифра
+*
+*                 в строке "sum = number % 10 - sum;"  откусили последний элемент 12387 1 -> 1
+*                 1 - 0 = 1(sum)   number укорачивается и становится 12387
+*                   1238 7 -> 7
+*                 7 - 1 = 6(sum)   number укорачивается и становится 1238
+*                   123 8 -> 8
+*                 8 - 6 = 2(sum)    number укорачивается и становится 123
+*                   12 3 -> 3
+*                 3 - 2 = 1(sum)   number укорачивается и становится 12
+*                   1 2 -> 2
+*                 2 - 1 = 1(sum)   number укорачивается и становится 1
+*                   1 - 1 = 0
+*   мы пришли к тому, что sum = 0. строка return !sum возвращает "перевернутый" false => true => печать "Lucky"
+*  если sum будет к моменту выхода из цикла равно чему угодно, кроме 0, то функция вернет false.
+*
+*
+* */
