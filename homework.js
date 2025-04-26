@@ -14,7 +14,7 @@ function printArray(arr) {
 function bubbleSort(arr) {
     let temp = 0;
     for (let j = 0; j < arr.length; j++) {
-        for (let i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length-1; i++) {
             if (arr[i] > arr[i + 1]) {
                 temp = arr[i];
                 arr[i] = arr[i + 1];
@@ -22,6 +22,7 @@ function bubbleSort(arr) {
             }
         }
     }
+    console.log(`sorted arr is ${arr}`);
     return arr;
 }
 
