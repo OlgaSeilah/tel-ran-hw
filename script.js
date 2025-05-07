@@ -1,108 +1,46 @@
-const printArray = (arr) => {
-    console.log('----------------------');
-    for (let i = 0; i < arr.length; i++) {
-        console.log(arr[i]);
+const library = [];
+//isbn;title;author;year
+let inputData = prompt('Enter book data separate by ";"');
+
+while (inputData) {
+    let bookData = inputData.split(';'); //bookData - array of separate strings
+
+    if (findBook(library, bookData[0]) === -1) {
+        library.push(new Book(bookData[0], bookData[1], bookData[2], bookData[3]));
+        printLibrary(library);
     }
-    console.log('----------------------');
+    inputData = prompt('Enter book data separate by ";"');
 }
 
-const reverseArray = arr => {
-    let j = 0;
-    let temp = 0;
-    let halfLen = 0;
-    if (arr.length % 2 === 0) {
-        halfLen = arr.length / 2;
-    } else {
-        halfLen = (arr.length - 1) / 2;
-    }
-    for (let i = arr.length - 1; i >= halfLen; i--) {
-        temp = arr[j];
-        arr[j] = arr[i];
-        arr[i] = temp;
-        j++;
+printLibrary(library);
+
+function printLibrary(library) {
+    for (const item of library) {
+
     }
 }
 
-const search = (arr, value) => {
-    let digitIsInArray = false;
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === value) {
-            digitIsInArray = true;
+function printBook(book) {
+
+}
+
+function findBook(library, isbn) {
+    for (let i = 0; i < library.length; i++) {
+        let isbnFromLibrary = library[i].isbn;
+        console.log(`isbnFromLibrary: ${isbnFromLibrary}`);
+        if (isbnFromLibrary === isbn) {
             return i;
         }
     }
-    if (!digitIsInArray) {
-        return -1;
-    }
-}
-
-const primes = [2, 3, 5, 7, 11, 13, 17, 19];
-printArray(primes);
-reverseArray(primes);
-printArray(primes);
-
-let index = search(primes, 13);
-console.log(index); // 2
-index = search(primes, 10);
-console.log(index); // -1
-
-// =======================||=================================||===============================
-const reverseArray1 = arr => {
-    let temp = 0;
-    let halfLen = arr.length % 2 === 0 ? arr.length / 2 : (arr.length - 1) / 2;
-    for (let i = arr.length - 1; i >= halfLen; i--) {
-        temp = arr[arr.length - 1 - i];
-        arr[arr.length - 1 - i] = arr[i];
-        arr[i] = temp;
-    }
-}
-
-const search1 = (arr, value) => {
-    for (let i = 0; i < arr.length; i++) {
-        if (arr[i] === value) return i;
-    }
     return -1;
 }
 
-const primes1 = [2, 3, 5, 7, 11, 13, 17, 19, 7];
-printArray(primes1);
-reverseArray1(primes1);
-printArray(primes1);
-
-let index1 = search1(primes1, 13);
-console.log(index1); // 2
-index1 = search1(primes1, 10);
-console.log(index1); // -1
-
-// =======================||=================================||===============================
-const reverseArrayWhile = arr => {
-    let temp = 0;
-    let i = arr.length - 1;
-    let halfLen = arr.length % 2 === 0 ? arr.length / 2 : (arr.length - 1) / 2;
-
-    while (i > halfLen) {
-        temp = arr[arr.length - 1 - i];
-        arr[arr.length - 1 - i] = arr[i];
-        arr[i] = temp;
-        i--
+function Book(isbn, title, author, year) {
+    this.isbn = isbn;
+    this.title = title;
+    this.author = author;
+    this.year = +year;
+    this.toString = function () {
+        return `ISBN: ${this.isbn}, Title: ${this.title}, Author: ${this.author}, Year of publishing: ${this.year}`;
     }
 }
-
-const searchWhile = (arr, value) => {
-    let i = 0;
-    while (i < arr.length) {
-        if (arr[i] === value) return i;
-        i++
-    }
-    return -1;
-}
-
-const primesWhile = [2, 3, 5, 7, 11, 13, 17, 19, 7];
-printArray(primesWhile);
-reverseArrayWhile(primesWhile);
-printArray(primesWhile);
-
-let indexWhile = searchWhile(primesWhile, 13);
-console.log(indexWhile); // 2
-indexWhile = searchWhile(primesWhile, 10);
-console.log(indexWhile); // -1
