@@ -2,10 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Library</title>
-  <script src="./script.js"></script>
+    <title>hw</title>
+    <script src="events.js" defer></script>
 </head>
 <body>
-
+<h2>To-do list</h2>
+<p id="charCountRow">
+    Введено символов: <span id="charCountInputListener">0</span>
+</p>
+<label for="taskInput"></label>
+<input type="text" id="taskInput" placeholder="Enter task here">
+<button id="btnAddTask">Add task</button>
+<p id="tasksCountRow">
+    Введено задач: <span id="tasksCountInputListener">0</span>
+</p>
+<ul id="taskList">
+</ul>
 </body>
 </html>
