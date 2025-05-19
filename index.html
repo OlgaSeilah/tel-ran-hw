@@ -2,21 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>hw</title>
-    <script src="events.js" defer></script>
+    <title>TODO</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="contextMenu.js" defer></script>
+    <script src="todoScript.js" defer></script>
 </head>
 <body>
-<h2>To-do list</h2>
-<p id="charCountRow">
-    Введено символов: <span id="charCountInputListener">0</span>
-</p>
-<label for="taskInput"></label>
-<input type="text" id="taskInput" placeholder="Enter task here">
-<button id="btnAddTask">Add task</button>
-<p id="tasksCountRow">
-    Введено задач: <span id="tasksCountInputListener">0</span>
-</p>
+<h2>TO-DO-LIST</h2>
+<input type="text" id="taskInput" placeholder="Input task"/>
+<!--<button onclick="addTask()">Add task</button>-->
+<button id="addButton">Add task</button>
 <ul id="taskList">
+    <!--Here the user will add tasks-->
 </ul>
 </body>
 </html>
