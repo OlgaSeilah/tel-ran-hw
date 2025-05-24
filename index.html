@@ -3,9 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <title>Library</title>
-  <script src="./script.js"></script>
+    <script src="./library-script.js" defer></script>
 </head>
 <body>
-
+<div>
+    <label>ISBN:
+        <input id="isbn" type="text">
+    </label>
+    <label>Title:
+        <input id="title" type="text">
+    </label>
+    <label>Author:
+        <input id="author" type="text">
+    </label>
+    <label>Year of publishing::
+        <input id="year" type="number">
+    </label>
+    <button id="addBook">Add book</button>
+</div>
+<h1>List of books</h1>
+<ol id="result"></ol>
+<div id="stats">
+    <h2>Stats</h2>
+    <!--
+    Min year of publishing
+    Max year of publishing
+    Total books
+    -->
+</div>
 </body>
 </html>
