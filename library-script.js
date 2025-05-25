@@ -1,10 +1,13 @@
 const library = [];
+
 const addBookBtn = document.getElementById('addBook');
+
 const inputIsbn = document.getElementById("isbn")
 const inputTitle = document.getElementById("title");
 const inputAuthor = document.getElementById("author");
-const allInputs = document.querySelectorAll("div input");
 const inputYearPublishing = document.getElementById("year");
+
+const allInputs = Array.from(document.querySelectorAll("div input"));
 const libraryList = document.getElementById('result')
 
 const statsDiv = document.getElementById('stats');
@@ -73,11 +76,41 @@ function createStatsLine(statsTitleMin, min,
     totalCountEl.textContent = total + totalCount;
 }
 
+function allInputsFilled() {
+    if (inputIsbn.value !== '' || inputTitle.value !== '' ||
+        inputAuthor.value !== '' || inputYearPublishing.value !== '') {
+        return true;
+    }
+}
+
 //==== Listeners ======
 
 addBookBtn.addEventListener('click', () => {
-    addBookToList();
-    showStats();
+    if (!allInputsFilled()) {
+        alert('Please fill all forms');
+        allInputs
+            .filter(item => item.value === "")
+            .forEach(item => item.style.borderColor = "red");
+    } else {
+        addBookToList();
+        showStats();
+    }
+})
+
+allInputs.forEach(input => {
+    input.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            if (!allInputsFilled()) {
+                alert('Please fill all forms');
+                allInputs
+                    .filter(item => item.value === "")
+                    .forEach(item => item.style.borderColor = "red");
+            } else {
+                addBookToList();
+                showStats();
+            }
+        }
+    })
 })
 
 
