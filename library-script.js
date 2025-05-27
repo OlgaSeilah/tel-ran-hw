@@ -1,4 +1,5 @@
 const library = [];
+let deletedBookISBN;
 
 const addBookBtn = document.getElementById('addBook');
 
@@ -36,8 +37,16 @@ function createListItemWithBook(currentBook) {
     const listItem = document.createElement('li');
     listItem.textContent = currentBook.toString();
     libraryList.appendChild(listItem);
+    listItem.append(createRedCrossBtn());
 }
 
+function createRedCrossBtn() {
+    const delButton = document.createElement('button');
+    delButton.innerText = ' \u274C ';
+    delButton.className = 'btn';
+
+    return delButton;
+}
 
 function showStats() {
 
@@ -47,7 +56,6 @@ function showStats() {
         `Max year of publishing: `, library[library.length - 1].year,
         `Total books: `, library.length)
 }
-
 
 function createStatsLine(statsTitleMin, min,
                          statsTitleMax, max,
@@ -83,6 +91,32 @@ function allInputsFilled() {
     }
 }
 
+function reCountStats() {
+    console.log(library)
+    library.splice(library.findIndex(i => i.isbn === deletedBookISBN), 1);
+    console.log(library)
+
+    if (library.length === 0) {
+        deleteStats();
+    } else {
+        showStats();
+    }
+}
+
+function deleteStats() {
+    document.querySelectorAll('#stats div').forEach(el => {
+        el.remove()
+    })
+}
+
+function deleteBook(event) {
+    if (event.target.classList.contains('btn')) {
+        deletedBookISBN = event.target.closest('li').innerText.split(',')[0].substring(5).trim();
+
+        event.target.closest('li').remove();
+    }
+}
+
 //==== Listeners ======
 
 addBookBtn.addEventListener('click', () => {
@@ -113,10 +147,14 @@ allInputs.forEach(input => {
     })
 })
 
+libraryList.addEventListener('click', (event) => {
+    deleteBook(event);
+    reCountStats();
+})
 
 //==== Entities ======
 function Book(isbn, title, author, year) {
-    this.isbn = +isbn;
+    this.isbn = isbn;
     this.title = title;
     this.author = author;
     this.year = +year;
