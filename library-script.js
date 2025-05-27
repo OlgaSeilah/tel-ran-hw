@@ -37,13 +37,14 @@ function createListItemWithBook(currentBook) {
     const listItem = document.createElement('li');
     listItem.textContent = currentBook.toString();
     libraryList.appendChild(listItem);
-    listItem.append(createRedCrossBtn());
+    listItem.append(createUniqueRedCrossBtn(currentBook));
 }
 
-function createRedCrossBtn() {
+function createUniqueRedCrossBtn(currentBook) {
     const delButton = document.createElement('button');
     delButton.innerText = ' \u274C ';
     delButton.className = 'btn';
+    delButton.id = `${currentBook.isbn}`;
 
     return delButton;
 }
@@ -111,7 +112,7 @@ function deleteStats() {
 
 function deleteBook(event) {
     if (event.target.classList.contains('btn')) {
-        deletedBookISBN = event.target.closest('li').innerText.split(',')[0].substring(5).trim();
+        deletedBookISBN = event.target.getAttribute('id');
 
         event.target.closest('li').remove();
     }
