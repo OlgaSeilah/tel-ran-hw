@@ -1,5 +1,4 @@
 const library = [];
-let deletedBookISBN;
 
 const addBookBtn = document.getElementById('addBook');
 
@@ -44,7 +43,11 @@ function createUniqueRedCrossBtn(currentBook) {
     const delButton = document.createElement('button');
     delButton.innerText = ' \u274C ';
     delButton.className = 'btn';
-    delButton.id = `${currentBook.isbn}`;
+
+    delButton.addEventListener('click', (event) => {
+            event.target.closest('li').remove();
+        reCountStats(currentBook);
+    })
 
     return delButton;
 }
@@ -92,9 +95,9 @@ function allInputsFilled() {
     }
 }
 
-function reCountStats() {
+function reCountStats(currentBook) {
     console.log(library)
-    library.splice(library.findIndex(i => i.isbn === deletedBookISBN), 1);
+    library.splice(library.findIndex(i => i.isbn === currentBook.isbn), 1);
     console.log(library)
 
     if (library.length === 0) {
@@ -108,14 +111,6 @@ function deleteStats() {
     document.querySelectorAll('#stats div').forEach(el => {
         el.remove()
     })
-}
-
-function deleteBook(event) {
-    if (event.target.classList.contains('btn')) {
-        deletedBookISBN = event.target.getAttribute('id');
-
-        event.target.closest('li').remove();
-    }
 }
 
 //==== Listeners ======
@@ -146,11 +141,6 @@ allInputs.forEach(input => {
             }
         }
     })
-})
-
-libraryList.addEventListener('click', (event) => {
-    deleteBook(event);
-    reCountStats();
 })
 
 //==== Entities ======
