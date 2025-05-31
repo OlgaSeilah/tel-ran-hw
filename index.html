@@ -2,34 +2,37 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Library</title>
-    <script src="./library-script.js" defer></script>
+    <title>Person</title>
+    <script src="personsScript.js" defer></script>
 </head>
 <body>
 <div>
-    <label>ISBN:
-        <input id="isbn" type="text">
+    <label>ID:
+        <input id="personId" type="text">
     </label>
-    <label>Title:
-        <input id="title" type="text">
+    <label>First Name:
+        <input id="firstName" type="text">
     </label>
-    <label>Author:
-        <input id="author" type="text">
+    <label>Last Name:
+        <input id="lastName" type="text">
     </label>
-    <label>Year of publishing::
-        <input id="year" type="number">
+    <label>Age:
+        <input id="age" type="number" min="0">
     </label>
-    <button id="addBook">Add book</button>
+    <button id="addPerson">Add person</button>
 </div>
-<h1>List of books</h1>
-<ol id="result"></ol>
+<div>
+    <h2>Persons</h2>
+    <ol id="personList"></ol>
+</div>
 <div id="stats">
     <h2>Stats</h2>
     <!--
-    Min year of publishing
-    Max year of publishing
-    Total books
-    -->
+    Min age
+    Max age
+    Average age
+    Total persons
+     -->
 </div>
 </body>
 </html>
