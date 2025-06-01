@@ -9,10 +9,13 @@ const addPersonBtn = document.getElementById('addPerson');
 
 //============ Logic
 function addPersonToList() {
-    const inputValues = getValueFromInputs();
+    let [id, firstName, lastName, age] = allInputFields.map(field => {
+        return field.value;
+    })
 
     const currentPerson = new Person(
-        inputValues[0], inputValues[1], inputValues[2], inputValues[3]);
+        id, firstName, lastName, +age
+    );
 
     const isPersonInList = persons.find(person => person.personId === currentPerson.personId);
 
@@ -34,8 +37,11 @@ function countStats() {
     const statsDiv = document.createElement('div');
 
     if(persons.length) {
-        const ageMin = Math.min(...persons);
-        const ageMax = Math.max(...persons);
+        const ages = persons.map(person => person.age);
+
+        const ageMin = Math.min(...ages);
+        const ageMax = Math.max(...ages);
+
         const averageAge = persons.reduce((average, currentPerson) => average + currentPerson.age, 0) / persons.length;
 
         const minAgeText = createStatsRows(`Min age = ${ageMin}`, 'h4');
@@ -90,16 +96,6 @@ function createStatsRows(textContent, tag) {
     row.innerText = textContent;
     return row;
 }
-
-function getValueFromInputs() {
-
-    let inputValues = allInputFields.map(field => {
-        return field.value;
-    })
-
-    return [id, firstName, lastName, age] = inputValues;
-}
-
 
 //============ Listeners
 addPersonBtn.addEventListener('click', () => {
