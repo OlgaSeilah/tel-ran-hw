@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Person</title>
-    <script src="personsScript.js" defer></script>
+    <title>Company</title>
+    <script src="utils.js" defer></script>
+    <script src="./Employee.js" defer></script>
+    <script src="./Company.js" defer></script>
+    <script src="./script.js" defer></script>
 </head>
 <body>
 <div>
@@ -16,8 +19,11 @@
     <label>Last Name:
         <input id="lastName" type="text">
     </label>
-    <label>Age:
-        <input id="age" type="number" min="0">
+    <label>Birthdate:
+        <input id="birthDate" type="date">
+    </label>
+    <label>Salary:
+        <input id="salary" type="number">
     </label>
     <button id="addPerson">Add person</button>
 </div>
@@ -31,6 +37,8 @@
     Min age
     Max age
     Average age
+    Total salary
+    Average salary
     Total persons
      -->
 </div>
